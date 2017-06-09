@@ -49,5 +49,3 @@ class ReportStream extends Writable {
 }
 
 module.exports = ReportStream;
-
-// TODO: Show throughput in bytes/second (length / interval / 60)

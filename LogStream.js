@@ -10,7 +10,7 @@ class LogStream extends Duplex {
    */
   constructor(options) {
     super(options);
-    this.startTime = new Date();
+    this.startTime = Date.now();
   }
 
   _read(size) {
@@ -24,8 +24,8 @@ class LogStream extends Duplex {
 
   static summarize(data, startTime) {
     return JSON.stringify({
-      time: new Date() - startTime,             // Total duration of monitor
-      bytes: data.length,                      // Length in bytes of data for this summary
+      time: Date.now() - startTime,             // Total duration of monitor
+      bytes: data.length,                       // Length in bytes of data for this summary
       lines: data.toString().split('\n').length // Lines written since last summary
     });
   }

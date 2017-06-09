@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// $ tail -f mylogfile | myscript --verbose
+// $ tail -f log.txt | node monitor --verbose
 
 const
   Summary = require('./summary'),
