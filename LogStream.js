@@ -26,7 +26,7 @@ class LogStream extends Duplex {
     return JSON.stringify({
       time: new Date() - startTime,
       length: data.length,
-      lines: data.toString().split('\n').length - 1
+      lines: data.toString().split('\n').length
     });
   }
 }

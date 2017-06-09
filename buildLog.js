@@ -1,6 +1,5 @@
 const fs = require('fs');
 const corpus = `abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789 ;:/?!'"`;
-
 const stream = fs.createWriteStream('log.txt');
 
 /**
