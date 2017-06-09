@@ -19,7 +19,7 @@ class ReportStream extends Writable {
       const summary = this.parseSummary(data);
       if(summary !== null) console.log(summary);
       done();
-    }, 1000);
+    }, this.interval);
   }
 
   parseSummary(data) {
