@@ -1,20 +1,36 @@
 const { Writable } = require('stream');
 
-/**
- * Read text input and output summary objects
- * with Elapsed Time, Byte length, and Total Lines
- */
+/** Class representing a writable Report Stream */
 class ReportStream extends Writable {
-  constructor(options) {
+
+  /**
+   * Create a ReportStream
+   * @constructor
+   * @param {object} options - Writable stream options
+   */
+  constructor(options = {}) {
     super({objectMode: true});
+    this.interval = options.interval || 1000;
+    this.lines = 0;
   }
 
   _write(data, encoding, done) {
-    const summary = JSON.parse(data.toString());
-    console.dir(summary);
-    done()
+    setTimeout(() => {
+      const summary = this.parseSummary(data);
+      if(summary !== null) console.log(summary);
+      done();
+    }, 1000);
   }
 
+  parseSummary(data) {
+    try {
+      const summaryObject = JSON.parse(data.toString());
+      return summaryObject;
+    } catch(err) {
+      console.error(`Error parsing incoming summary object: ${err}`);
+      return null;
+    }
+  }
 }
 
 module.exports = ReportStream;

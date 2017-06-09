@@ -1,32 +1,32 @@
 const { Duplex } = require('stream');
-const buffer = Symbol('buffer');
 
-/**
- * Read text input and output summary objects
- * with Elapsed Time, Byte length, and Total Lines
- */
+/** Class representing a readable and writable stream of log text data */
 class LogStream extends Duplex {
+
+  /**
+   * Create a LogStream
+   * @constructor
+   * @param {object} options - Readable/Writable stream options
+   */
   constructor(options) {
     super(options);
-    this.waiting = false;
+    this.startTime = new Date();
   }
 
   _read(size) {
-    // TODO: save data to an array in the write method then this.push it here
-    
+    // Unimplemented
   }
 
   _write(data, encoding, done) {
-    this.waiting = false;    
-    this.push(this.summarize(data));
+    this.push(LogStream.summarize(data, this.startTime));
     done();
   }
 
-  summarize(data) {
+  static summarize(data, startTime) {
     return JSON.stringify({
-      time: 0,
+      time: new Date() - startTime,
       length: data.length,
-      lines: data.toString().split('\n').length
+      lines: data.toString().split('\n').length - 1
     });
   }
 }
