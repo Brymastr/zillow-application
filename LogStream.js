@@ -24,9 +24,9 @@ class LogStream extends Duplex {
 
   static summarize(data, startTime) {
     return JSON.stringify({
-      time: new Date() - startTime,
-      length: data.length,
-      lines: data.toString().split('\n').length
+      time: new Date() - startTime,             // Total duration of monitor
+      bytes: data.length,                      // Length in bytes of data for this summary
+      lines: data.toString().split('\n').length // Lines written since last summary
     });
   }
 }

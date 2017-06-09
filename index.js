@@ -9,7 +9,7 @@ const
 
 const helpText = `
   -h, --help          show this help text
-  --verbose           show filename
+  --verbose           show extra information in reports
   --interval=[+]NUM   interval at which to write reports to stdout in milliseconds (default 1000)
 `;
 
@@ -19,7 +19,7 @@ function parseArguments(args) {
     if(arg === '-h' || arg === '--help') {
       console.log(helpText);
       return null;
-    } else if(arg === '--verbose')
+    } else if(arg === '-v' || arg === '--verbose')
       options.verbose = true;
     else if(arg.startsWith('--interval'))
       options.interval = parseInt(arg.match(/=(\d*)/)[1]);
